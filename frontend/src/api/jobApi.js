@@ -11,3 +11,7 @@ export const createJobApi = (data, token) => {
     },
   });
 };
+
+export const deleteJobApi = (id) => {
+  return API.delete(`/jobs/${id}`);
+};

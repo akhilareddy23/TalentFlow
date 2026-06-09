@@ -168,9 +168,35 @@ const updateApplicationStatus = async (req, res) => {
   }
 };
 
+// @desc    Get all applications across all jobs created by this recruiter
+// @route   GET /api/applications/recruiter/all
+// @access  Private (Recruiter only)
+const getRecruiterApplications = async (req, res) => {
+  try {
+    const recruiterId = req.user.id;
+
+    // Find all jobs created by this recruiter
+    const jobs = await Job.find({ createdBy: recruiterId });
+    const jobIds = jobs.map((job) => job._id);
+
+    const applications = await Application.find({ job: { $in: jobIds } })
+      .populate("job")
+      .populate("applicant", "name email title skills")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json(applications);
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to fetch recruiter applications",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   applyJob,
   getMyApplications,
   getJobApplications,
+  getRecruiterApplications,
   updateApplicationStatus,
 };

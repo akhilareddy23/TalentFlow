@@ -3,6 +3,7 @@ import {
   applyJobApi,
   getMyApplicationsApi,
   getJobApplicationsApi,
+  getRecruiterApplicationsApi,
   updateApplicationStatusApi,
 } from "../../api/applicationApi";
 import { toast } from "react-hot-toast";
@@ -12,6 +13,7 @@ const applicationSlice = createSlice({
   initialState: {
     applications: [],
     applicants: [],
+    recruiterApplications: [],
     loading: false,
   },
   reducers: {
@@ -24,11 +26,18 @@ const applicationSlice = createSlice({
     setApplicants: (state, action) => {
       state.applicants = action.payload;
     },
+    setRecruiterApplications: (state, action) => {
+      state.recruiterApplications = action.payload;
+    },
   },
 });
 
-export const { setLoading, setApplications, setApplicants } =
-  applicationSlice.actions;
+export const {
+  setLoading,
+  setApplications,
+  setApplicants,
+  setRecruiterApplications,
+} = applicationSlice.actions;
 
 // Thunks
 export const fetchMyApplications = () => async (dispatch) => {
@@ -71,12 +80,27 @@ export const fetchJobApplicants = (jobId) => async (dispatch) => {
   }
 };
 
+export const fetchRecruiterApplications = () => async (dispatch) => {
+  try {
+    dispatch(setLoading(true));
+    const res = await getRecruiterApplicationsApi();
+    dispatch(setRecruiterApplications(res.data));
+  } catch (err) {
+    console.error(err);
+  } finally {
+    dispatch(setLoading(false));
+  }
+};
+
 export const updateApplicationStatus = (appId, status, jobId) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     const res = await updateApplicationStatusApi(appId, status);
     toast.success(res.data.message || `Status updated to ${status}`);
-    dispatch(fetchJobApplicants(jobId));
+    if (jobId) {
+      dispatch(fetchJobApplicants(jobId));
+    }
+    dispatch(fetchRecruiterApplications());
   } catch (err) {
     const errorMsg = err.response?.data?.message || "Failed to update status";
     toast.error(errorMsg);

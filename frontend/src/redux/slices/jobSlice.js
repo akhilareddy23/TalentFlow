@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchJobsApi, createJobApi } from "../../api/jobApi";
+import { fetchJobsApi, createJobApi, deleteJobApi } from "../../api/jobApi";
+import { toast } from "react-hot-toast";
 
 const jobSlice = createSlice({
   name: "jobs",
@@ -37,6 +38,24 @@ export const createJob = (jobData, callback) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     await createJobApi(jobData);
+    
+    // Refresh jobs list
+    const res = await fetchJobsApi();
+    dispatch(setJobs(res.data));
+    
+    if (callback) callback(null);
+  } catch (err) {
+    console.error(err);
+    if (callback) callback(err);
+  } finally {
+    dispatch(setLoading(false));
+  }
+};
+
+export const deleteJob = (id, callback) => async (dispatch) => {
+  try {
+    dispatch(setLoading(true));
+    await deleteJobApi(id);
     
     // Refresh jobs list
     const res = await fetchJobsApi();

@@ -8,12 +8,12 @@ const jobRoutes = require('./routes/jobRoutes');
 const adminRoutes = require("./routes/adminRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
 const profileRoutes = require("./routes/profileRoutes");
-dotenv.config();
+const path = require('path');
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 // Connect MongoDB
 connectDB();
 
-const path = require('path');
 const app = express();
 
 // Middleware

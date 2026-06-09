@@ -15,3 +15,7 @@ export const getJobApplicationsApi = (jobId) => {
 export const updateApplicationStatusApi = (applicationId, status) => {
   return API.put(`/applications/${applicationId}/status`, { status });
 };
+
+export const getRecruiterApplicationsApi = () => {
+  return API.get("/applications/recruiter/all");
+};
