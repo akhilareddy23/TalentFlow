@@ -1,11 +1,15 @@
 import axios from "axios";
 
+// Check if a live environment variable exists, otherwise fall back to your local server
+const baseUrl = import.meta.env.VITE_API_URL
+  ? `${import.meta.env.VITE_API_URL}/api`
+  : "http://localhost:5000/api";
+
 const API = axios.create({
-  baseURL: "/api",
+  baseURL: baseUrl,
 });
 
 API.interceptors.request.use((req) => {
-  // Grab the token as a plain string, NO JSON.parse() needed here
   const token = localStorage.getItem("token");
 
   if (token) {
