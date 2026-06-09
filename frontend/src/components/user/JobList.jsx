@@ -3,9 +3,8 @@ import JobCard from "./JobCard";
 export default function JobList({ jobs, onApplyClick }) {
   if (jobs.length === 0) {
     return (
-      <div className="bg-white border border-slate-200 rounded-2xl p-12 text-center text-slate-500">
-        <span className="text-4xl block mb-3">🔍</span>
-        No jobs match your search queries.
+      <div className="bg-white border border-[#e6ebf1] rounded-xl p-12 text-center text-slate-500 shadow-sm font-sans">
+        <p className="text-[14px] font-normal text-[#4f5b66]">No jobs match your search queries.</p>
       </div>
     );
   }

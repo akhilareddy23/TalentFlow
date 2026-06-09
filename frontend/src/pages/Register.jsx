@@ -40,14 +40,14 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0a1128] px-4">
-      <div className="bg-white border border-slate-200 p-8 rounded-2xl w-full max-w-md shadow-2xl transition-all duration-300">
+    <div className="min-h-screen flex items-center justify-center bg-[#f6f9fc] px-4 font-sans">
+      <div className="bg-white border border-[#e6ebf1] p-10 rounded-xl w-full max-w-md shadow-xl transition-all duration-300">
         
         <div className="text-center mb-8">
-          <h2 className="text-4xl font-extrabold text-[#0a1128] tracking-tight pb-1">
+          <h2 className="text-3xl font-semibold text-[#0a2540] tracking-tight pb-1">
             Join TalentFlow
           </h2>
-          <p className="text-slate-500 mt-2 text-sm font-medium">
+          <p className="text-slate-500 mt-2 text-[14px]">
             Create your account to start your journey
           </p>
         </div>
@@ -96,7 +96,7 @@ export default function Register() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-2 py-3 px-4 bg-[#0a1128] hover:bg-[#15234d] text-white font-bold rounded-xl shadow-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 text-sm"
+            className="w-full mt-2 py-2.5 px-4 bg-[#635bff] hover:bg-[#0a2540] text-white font-medium rounded-lg shadow-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 text-[14px]"
           >
             {loading ? (
               <>
@@ -112,11 +112,11 @@ export default function Register() {
           </button>
         </form>
 
-        <div className="mt-6 text-center text-slate-500 text-sm font-medium">
+        <div className="mt-6 text-center text-slate-500 text-[14px]">
           Already have an account?{" "}
           <Link
             to="/login"
-            className="text-blue-600 hover:text-blue-500 font-semibold transition-all duration-150 underline decoration-blue-600/20"
+            className="text-[#635bff] hover:text-[#0a2540] font-medium transition-all duration-150 underline decoration-[#635bff]/20"
           >
             Sign In
           </Link>

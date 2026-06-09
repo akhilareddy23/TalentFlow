@@ -151,19 +151,19 @@ export default function UserDashboard() {
   };
 
   return (
-    <div className="flex min-h-screen bg-slate-50 text-slate-800 font-sans">
+    <div className="flex min-h-screen bg-[#f6f9fc] text-[#0a2540] font-sans">
       {/* Sidebar */}
       <UserSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-h-screen overflow-hidden">
         {/* Header */}
-        <header className="border-b border-slate-200 bg-white px-8 py-5 flex-shrink-0 flex justify-between items-center">
+        <header className="border-b border-[#e6ebf1] bg-white px-8 py-5 flex-shrink-0 flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-extrabold text-[#0a1128] tracking-tight">
+            <h1 className="text-xl font-semibold text-[#0a2540] tracking-tight">
               {activeTab === "browse" ? "Find Your Dream Job" : "Track Your Applications"}
             </h1>
-            <p className="text-sm text-slate-500 mt-1 font-medium">
+            <p className="text-[13px] text-slate-500 mt-1 font-normal">
               {activeTab === "browse"
                 ? "Search and apply for jobs suited to your skills."
                 : "Monitor the review process of your submitted applications."}
@@ -177,25 +177,29 @@ export default function UserDashboard() {
             
             {/* Show Filters only if browsing */}
             {activeTab === "browse" && (
-              <div className="flex flex-col md:flex-row gap-4 bg-white border border-slate-200 p-4 rounded-2xl shadow-sm">
+              <div className="flex flex-col md:flex-row gap-4 bg-white border border-[#e6ebf1] p-4 rounded-xl shadow-sm">
                 {/* Search Input */}
-                <div className="flex-1 relative text-sm font-semibold">
-                  <span className="absolute left-3.5 top-3 text-slate-400">🔍</span>
+                <div className="flex-1 relative text-[14px]">
+                  <span className="absolute left-3.5 top-3.5 text-slate-400">
+                    <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </span>
                   <input
                     type="text"
                     placeholder="Search by title, company, location, or skills..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0a1128]/10 focus:border-[#0a1128] transition-all text-sm font-medium"
+                    className="w-full bg-white border border-[#e6ebf1] rounded-lg pl-10 pr-4 py-2.5 text-[#0a2540] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#635bff]/20 focus:border-[#635bff] transition-all text-[14px] font-normal shadow-sm"
                   />
                 </div>
 
                 {/* Job Type Dropdown */}
-                <div className="w-full md:w-48 text-sm">
+                <div className="w-full md:w-48 text-[14px]">
                   <select
                     value={selectedType}
                     onChange={(e) => setSelectedType(e.target.value)}
-                    className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0a1128]/10 focus:border-[#0a1128] transition-all text-sm font-semibold"
+                    className="w-full bg-white border border-[#e6ebf1] rounded-lg px-3 py-2.5 text-[#0a2540] focus:outline-none focus:ring-2 focus:ring-[#635bff]/20 focus:border-[#635bff] transition-all text-[14px] font-medium shadow-sm"
                   >
                     <option value="All">All Job Types</option>
                     <option value="Full Time">Full Time</option>
@@ -220,22 +224,22 @@ export default function UserDashboard() {
 
       {/* Detailed Application Modal */}
       {showApplyModal && jobToApply && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/30 backdrop-blur-sm">
-          <div className="bg-white border border-slate-200 rounded-2xl w-full max-w-lg p-6 shadow-2xl max-h-[90vh] overflow-y-auto font-sans">
-            <div className="flex justify-between items-center border-b border-slate-100 pb-3 mb-5">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0a2540]/30 backdrop-blur-[2px]">
+          <div className="bg-white border border-[#e6ebf1] rounded-xl w-full max-w-lg p-8 shadow-2xl max-h-[90vh] overflow-y-auto font-sans">
+            <div className="flex justify-between items-center border-b border-[#e6ebf1] pb-3 mb-5">
               <div>
-                <h3 className="text-xl font-bold text-slate-900 tracking-tight">Apply for Position</h3>
-                <p className="text-xs text-slate-500 mt-0.5">{jobToApply.title} at {jobToApply.company}</p>
+                <h3 className="text-[18px] font-semibold text-[#0a2540] tracking-tight">Apply for Position</h3>
+                <p className="text-[13px] text-slate-500 mt-0.5">{jobToApply.title} at {jobToApply.company}</p>
               </div>
               <button
                 onClick={handleCloseApplyModal}
-                className="text-slate-400 hover:text-slate-900 text-lg font-bold"
+                className="text-slate-400 hover:text-slate-900 text-lg font-normal"
               >
                 ✕
               </button>
             </div>
 
-            <form onSubmit={handleSubmitApplication} noValidate className="space-y-4 text-sm text-slate-700">
+            <form onSubmit={handleSubmitApplication} noValidate className="space-y-4 text-[14px] text-slate-700">
               
               <div className="grid grid-cols-2 gap-4">
                 <GoogleInput
@@ -258,30 +262,30 @@ export default function UserDashboard() {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                <label className="block text-sm font-medium text-[#4f5b66] mb-1.5">
                   Candidate Profile Status
-                  <span className="text-red-500 ml-1 font-bold text-sm">*</span>
+                  <span className="text-red-500 ml-1 font-medium">*</span>
                 </label>
                 <div className="flex space-x-4 mt-1">
-                  <label className="flex items-center space-x-2 cursor-pointer font-bold">
+                  <label className="flex items-center space-x-2 cursor-pointer font-normal text-[14px] text-slate-700">
                     <input
                       type="radio"
                       name="applicantType"
                       value="Student"
                       checked={applicantType === "Student"}
                       onChange={() => setApplicantType("Student")}
-                      className="text-[#0a1128] focus:ring-[#0a1128]"
+                      className="text-[#635bff] focus:ring-[#635bff] border-[#e6ebf1]"
                     />
                     <span>Student / Fresh Graduate</span>
                   </label>
-                  <label className="flex items-center space-x-2 cursor-pointer font-bold">
+                  <label className="flex items-center space-x-2 cursor-pointer font-normal text-[14px] text-slate-700">
                     <input
                       type="radio"
                       name="applicantType"
                       value="Experienced"
                       checked={applicantType === "Experienced"}
                       onChange={() => setApplicantType("Experienced")}
-                      className="text-[#0a1128] focus:ring-[#0a1128]"
+                      className="text-[#635bff] focus:ring-[#635bff] border-[#e6ebf1]"
                     />
                     <span>Experienced Professional</span>
                   </label>
@@ -290,7 +294,7 @@ export default function UserDashboard() {
 
               {/* Conditional: Student Fields */}
               {applicantType === "Student" && (
-                <div className="space-y-4 border-t border-slate-100 pt-4">
+                <div className="space-y-4 border-t border-[#e6ebf1] pt-4">
                   <div className="grid grid-cols-2 gap-4">
                     <GoogleInput
                       label="College / University"
@@ -314,7 +318,7 @@ export default function UserDashboard() {
 
               {/* Conditional: Experienced Fields */}
               {applicantType === "Experienced" && (
-                <div className="space-y-4 border-t border-slate-100 pt-4">
+                <div className="space-y-4 border-t border-[#e6ebf1] pt-4">
                   <div className="grid grid-cols-3 gap-4">
                     <div className="col-span-2">
                       <GoogleInput
@@ -349,7 +353,7 @@ export default function UserDashboard() {
               )}
 
               {/* Expected CTC (Shared) */}
-              <div className="border-t border-slate-100 pt-4">
+              <div className="border-t border-[#e6ebf1] pt-4">
                 <GoogleInput
                   label="Expected CTC (Salary)"
                   required={true}
@@ -360,18 +364,18 @@ export default function UserDashboard() {
                 />
               </div>
 
-              <div className="flex justify-end space-x-3 pt-4 border-t border-slate-100">
+              <div className="flex justify-end space-x-3 pt-4 border-t border-[#e6ebf1]">
                 <button
                   type="button"
                   onClick={handleCloseApplyModal}
-                  className="px-4 py-2 border border-slate-200 text-slate-700 rounded-xl hover:bg-slate-50 font-bold"
+                  className="px-4 py-2 border border-[#e6ebf1] text-[#4f5b66] rounded-lg hover:bg-[#f6f9fc] font-medium text-[13px] transition-all"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submittingApp}
-                  className="px-5 py-2 bg-[#0a1128] hover:bg-[#15234d] text-white font-bold rounded-xl shadow-sm disabled:opacity-50"
+                  className="px-5 py-2 bg-[#635bff] hover:bg-[#0a2540] text-white font-medium rounded-lg shadow-sm disabled:opacity-50 text-[13px] transition-all"
                 >
                   {submittingApp ? "Submitting..." : "Submit Application"}
                 </button>
