@@ -31,7 +31,7 @@ export const validateUrl = (url, fieldName) => {
     return `${fieldName} is required.`;
   }
   // Standard URL regex
-  const urlRegex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/i;
+  const urlRegex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i;
   if (!urlRegex.test(url)) {
     return `Please enter a valid URL (starting with http:// or https://) for ${fieldName}.`;
   }

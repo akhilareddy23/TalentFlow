@@ -25,15 +25,20 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-[#f6f9fc] text-[#0a2540] flex flex-col font-sans">
       {/* Header */}
-      <header className="border-b border-[#15234d] bg-[#0a1128] px-6 py-4 flex items-center justify-between text-white">
-        <h1 className="text-xl font-semibold text-white tracking-tight">
-          Admin Control Center
-        </h1>
+      <header className="border-b border-[#e6ebf1] bg-white px-6 py-4 flex items-center justify-between text-[#0a2540]">
+        <div className="flex items-center space-x-2">
+          <svg className="w-5 h-5 text-[#635bff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+          </svg>
+          <h1 className="text-xl font-semibold text-[#0a2540] tracking-tight">
+            Admin Control Center
+          </h1>
+        </div>
         <button
           onClick={handleLogout}
-          className="py-1.5 px-4 bg-red-950/35 hover:bg-red-900/40 text-red-300 border border-red-900/20 rounded-xl font-bold transition-all duration-200 text-xs"
+          className="py-1.5 px-3 bg-white hover:bg-[#f6f9fc] text-[#4f5b66] hover:text-[#0a2540] border border-[#e6ebf1] rounded-lg font-medium transition-all duration-200 text-xs shadow-sm"
         >
-          Logout
+          Sign Out
         </button>
       </header>
 

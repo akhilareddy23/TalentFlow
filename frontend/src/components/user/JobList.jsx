@@ -1,6 +1,6 @@
 import JobCard from "./JobCard";
 
-export default function JobList({ jobs, onApplyClick }) {
+export default function JobList({ jobs, userProfile, onApplyClick }) {
   if (jobs.length === 0) {
     return (
       <div className="bg-white border border-[#e6ebf1] rounded-xl p-12 text-center text-slate-500 shadow-sm font-sans">
@@ -12,7 +12,7 @@ export default function JobList({ jobs, onApplyClick }) {
   return (
     <div className="grid gap-6">
       {jobs.map((job) => (
-        <JobCard key={job._id} job={job} onApplyClick={onApplyClick} />
+        <JobCard key={job._id} job={job} userProfile={userProfile} onApplyClick={onApplyClick} />
       ))}
     </div>
   );

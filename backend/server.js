@@ -7,22 +7,26 @@ const authRoutes = require('./routes/authRoutes');
 const jobRoutes = require('./routes/jobRoutes');
 const adminRoutes = require("./routes/adminRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
+const profileRoutes = require("./routes/profileRoutes");
 dotenv.config();
 
 // Connect MongoDB
 connectDB();
 
+const path = require('path');
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/jobs', jobRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/applications", applicationRoutes);
+app.use("/api/profile", profileRoutes);
 app.get('/', (req, res) => {
   res.json({ message: 'API is running...' });
 });

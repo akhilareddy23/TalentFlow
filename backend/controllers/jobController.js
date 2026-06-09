@@ -87,6 +87,12 @@ const deleteJob = async (req, res) => {
       });
     }
 
+    if (job.createdBy.toString() !== req.user.id && req.user.role !== 'admin') {
+      return res.status(403).json({
+        message: 'Access denied. You can only delete jobs you created.',
+      });
+    }
+
     await job.deleteOne();
 
     res.status(200).json({

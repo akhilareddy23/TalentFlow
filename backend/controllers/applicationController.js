@@ -108,8 +108,18 @@ const getJobApplications = async (req, res) => {
     }
 
     const applications = await Application.find({ job: jobId })
-      .populate("applicant", "name email")
+      .populate("applicant", "name email title skills")
       .sort({ createdAt: -1 });
+
+    // Automatically increment profileViews & searchAppearances for these applicants (Naukri analytics)
+    const applicantIds = applications.map(app => app.applicant?._id || app.applicant).filter(id => id);
+    if (applicantIds.length > 0) {
+      const User = require("../models/User");
+      await User.updateMany(
+        { _id: { $in: applicantIds } },
+        { $inc: { profileViews: 1, searchAppearances: 1 } }
+      );
+    }
 
     res.status(200).json(applications);
   } catch (error) {

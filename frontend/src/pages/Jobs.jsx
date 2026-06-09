@@ -8,7 +8,7 @@ export default function Jobs() {
 
   useEffect(() => {
     dispatch(fetchJobs());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="p-6">
