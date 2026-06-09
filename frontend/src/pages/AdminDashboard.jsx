@@ -25,27 +25,30 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-[#f6f9fc] text-[#0a2540] flex flex-col font-sans">
       {/* Header */}
-      <header className="border-b border-[#e6ebf1] bg-white px-6 py-4 flex items-center justify-between text-[#0a2540]">
+      <header
+        className="h-20 px-8 flex-shrink-0 flex justify-between items-center relative border-b border-white/10"
+        style={{ background: "linear-gradient(135deg, #0f1f3d 0%, #1a2f5a 60%, #2a1a6e 100%)" }}
+      >
         <div className="flex items-center space-x-2">
-          <svg className="w-5 h-5 text-[#635bff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
           </svg>
-          <h1 className="text-xl font-semibold text-[#0a2540] tracking-tight">
-            Admin Control Center
+          <h1 className="text-[18px] font-bold text-white tracking-tight">
+            Admin control center
           </h1>
         </div>
         <button
           onClick={handleLogout}
-          className="py-1.5 px-3 bg-white hover:bg-[#f6f9fc] text-[#4f5b66] hover:text-[#0a2540] border border-[#e6ebf1] rounded-lg font-medium transition-all duration-200 text-xs shadow-sm"
+          className="py-1.5 px-3 bg-white/10 hover:bg-white/20 text-white/80 hover:text-white border border-white/20 rounded-lg font-medium transition-all duration-200 text-xs"
         >
-          Sign Out
+          Sign out
         </button>
       </header>
 
       {/* Main Content */}
       <main className="flex-1 p-6 md:p-8 max-w-6xl mx-auto w-full">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-xl font-semibold text-[#0a2540] mb-6">System Overview</h2>
+          <h2 className="text-xl font-semibold text-[#0a2540] mb-6">System overview</h2>
 
           {loading ? (
             <div className="flex items-center space-x-3 text-slate-500 font-normal">
@@ -59,22 +62,22 @@ export default function AdminDashboard() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               
               <div className="p-6 bg-white border border-[#e6ebf1] rounded-xl shadow-sm hover:border-slate-300 transition-all duration-200">
-                <div className="text-[#4f5b66] text-[13px] font-medium">Total Candidates</div>
+                <div className="text-[#4f5b66] text-[13px] font-medium">Total candidates</div>
                 <div className="text-3xl font-semibold text-[#0a2540] mt-2">{stats?.users || 0}</div>
               </div>
 
               <div className="p-6 bg-white border border-[#e6ebf1] rounded-xl shadow-sm hover:border-slate-300 transition-all duration-200">
-                <div className="text-[#4f5b66] text-[13px] font-medium">Total Recruiters</div>
+                <div className="text-[#4f5b66] text-[13px] font-medium">Total recruiters</div>
                 <div className="text-3xl font-semibold text-[#635bff] mt-2">{stats?.recruiters || 0}</div>
               </div>
 
               <div className="p-6 bg-white border border-[#e6ebf1] rounded-xl shadow-sm hover:border-slate-300 transition-all duration-200">
-                <div className="text-[#4f5b66] text-[13px] font-medium">Active Jobs</div>
+                <div className="text-[#4f5b66] text-[13px] font-medium">Active jobs</div>
                 <div className="text-3xl font-semibold text-[#008a6b] mt-2">{stats?.jobs || 0}</div>
               </div>
 
               <div className="p-6 bg-white border border-[#e6ebf1] rounded-xl shadow-sm hover:border-slate-300 transition-all duration-200">
-                <div className="text-[#4f5b66] text-[13px] font-medium">Applications Submitted</div>
+                <div className="text-[#4f5b66] text-[13px] font-medium">Applications submitted</div>
                 <div className="text-3xl font-semibold text-[#0a2540] mt-2">{stats?.applications || 0}</div>
               </div>
 

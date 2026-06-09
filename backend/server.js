@@ -8,8 +8,9 @@ const jobRoutes = require('./routes/jobRoutes');
 const adminRoutes = require("./routes/adminRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
 const profileRoutes = require("./routes/profileRoutes");
+const aiRoutes = require("./routes/aiRoutes");
 const path = require('path');
-dotenv.config({ path: path.resolve(__dirname, '.env') });
+dotenv.config({ path: path.resolve(__dirname, '.env'), override: true });
 
 // Connect MongoDB
 connectDB();
@@ -27,6 +28,7 @@ app.use('/api/jobs', jobRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/api/profile", profileRoutes);
+app.use("/api/ai", aiRoutes);
 app.get('/', (req, res) => {
   res.json({ message: 'API is running...' });
 });

@@ -55,8 +55,8 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
       <div className="bg-white border border-[#e6ebf1] rounded-2xl p-5 shadow-sm space-y-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#e6ebf1] pb-4">
           <div>
-            <h2 className="text-[17px] font-bold text-[#0a2540] tracking-tight">candidates ats</h2>
-            <p className="text-[12px] text-slate-400 mt-0.5">filter, search, and update candidate statuses in real time.</p>
+            <h2 className="text-[17px] font-bold text-[#0a2540] tracking-tight">Candidates ats</h2>
+            <p className="text-[12px] text-slate-400 mt-0.5">Filter, search, and update candidate statuses in real time.</p>
           </div>
           <span className="text-[11px] font-semibold text-[#635bff] bg-purple-50 border border-purple-200 px-2.5 py-0.5 rounded-full self-start md:self-auto">
             {filteredApplications.length} candidates found
@@ -67,13 +67,13 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Job Filter */}
           <div className="space-y-1.5">
-            <label className="text-[11px] font-bold text-[#4f5b66]">filter by job</label>
+            <label className="text-[11px] font-bold text-[#4f5b66]">Filter by job</label>
             <select
               value={selectedJobId}
               onChange={(e) => setSelectedJobId(e.target.value)}
               className="w-full bg-white border border-[#e6ebf1] rounded-lg px-3 py-2.5 text-[#0a2540] focus:outline-none focus:ring-2 focus:ring-[#635bff]/20 focus:border-[#635bff] text-[13px] font-medium shadow-sm"
             >
-              <option value="All">all job openings ({recruiterJobs.length})</option>
+              <option value="All">All job openings ({recruiterJobs.length})</option>
               {recruiterJobs.map((job) => (
                 <option key={job._id} value={job._id}>
                   {job.title.toLowerCase()} ({job.company.toLowerCase()})
@@ -84,22 +84,22 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
 
           {/* Status Filter */}
           <div className="space-y-1.5">
-            <label className="text-[11px] font-bold text-[#4f5b66]">filter by status</label>
+            <label className="text-[11px] font-bold text-[#4f5b66]">Filter by status</label>
             <select
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value)}
               className="w-full bg-white border border-[#e6ebf1] rounded-lg px-3 py-2.5 text-[#0a2540] focus:outline-none focus:ring-2 focus:ring-[#635bff]/20 focus:border-[#635bff] text-[13px] font-medium shadow-sm"
             >
-              <option value="All">all statuses</option>
-              <option value="Applied">applied (new)</option>
-              <option value="Shortlisted">shortlisted</option>
-              <option value="Rejected">rejected</option>
+              <option value="All">All statuses</option>
+              <option value="Applied">Applied (new)</option>
+              <option value="Shortlisted">Shortlisted</option>
+              <option value="Rejected">Rejected</option>
             </select>
           </div>
 
           {/* Search Box */}
           <div className="space-y-1.5">
-            <label className="text-[11px] font-bold text-[#4f5b66]">search candidates</label>
+            <label className="text-[11px] font-bold text-[#4f5b66]">Search candidates</label>
             <div className="relative">
               <span className="absolute left-3 top-3 text-slate-400">
                 <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -126,8 +126,8 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
           <svg className="w-12 h-12 text-slate-200 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
             <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0" />
           </svg>
-          <p className="text-[14px] font-semibold text-[#0a2540]">no candidates found</p>
-          <p className="text-[13px] text-slate-400 mt-1">try adjusting your filters or search keywords.</p>
+          <p className="text-[14px] font-semibold text-[#0a2540]">No candidates found</p>
+          <p className="text-[13px] text-slate-400 mt-1">Try adjusting your filters or search keywords.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -168,7 +168,7 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
 
                   {/* Applied Job Banner */}
                   <div className="bg-[#f6f9fc] border border-[#e6ebf1] p-2.5 rounded-xl text-[12px] text-slate-600">
-                    <span className="font-semibold text-slate-400 text-[9px] block">job applied for</span>
+                    <span className="font-semibold text-slate-400 text-[9px] block">Job applied for</span>
                     <span className="font-bold text-[#0a2540]">{job.title.toLowerCase()}</span>
                     <span className="text-slate-400 ml-1.5">• {job.company.toLowerCase()}</span>
                   </div>
@@ -181,14 +181,14 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
                           <svg className="w-3.5 h-3.5 text-slate-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                           </svg>
-                          <span className="font-semibold text-slate-500 mr-1.5">college:</span>
+                          <span className="font-semibold text-slate-500 mr-1.5">College:</span>
                           <span className="text-[#0a2540] font-medium">{app.college.toLowerCase()}</span>
                         </div>
                         <div className="flex items-center">
                           <svg className="w-3.5 h-3.5 text-slate-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                           </svg>
-                          <span className="font-semibold text-slate-500 mr-1.5">degree:</span>
+                          <span className="font-semibold text-slate-500 mr-1.5">Degree:</span>
                           <span className="text-[#0a2540] font-medium">{app.degree.toLowerCase()}</span>
                         </div>
                       </>
@@ -198,21 +198,21 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
                           <svg className="w-3.5 h-3.5 text-slate-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                           </svg>
-                          <span className="font-semibold text-slate-500 mr-1.5">last company:</span>
+                          <span className="font-semibold text-slate-500 mr-1.5">Last company:</span>
                           <span className="text-[#0a2540] font-medium">{app.currentCompany.toLowerCase()}</span>
                         </div>
                         <div className="flex items-center">
                           <svg className="w-3.5 h-3.5 text-slate-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
-                          <span className="font-semibold text-slate-500 mr-1.5">experience:</span>
+                          <span className="font-semibold text-slate-500 mr-1.5">Experience:</span>
                           <span className="text-[#0a2540] font-medium">{app.experienceYears} yrs</span>
                         </div>
                         <div className="flex items-center">
                           <svg className="w-3.5 h-3.5 text-slate-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2" />
                           </svg>
-                          <span className="font-semibold text-slate-500 mr-1.5">current salary:</span>
+                          <span className="font-semibold text-slate-500 mr-1.5">Current salary:</span>
                           <span className="text-[#0a2540] font-semibold">{app.currentCtc.toLowerCase()}</span>
                         </div>
                       </>
@@ -221,7 +221,7 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
                       <svg className="w-3.5 h-3.5 text-slate-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1" />
                       </svg>
-                      <span className="font-semibold text-slate-500 mr-1.5">expected salary:</span>
+                      <span className="font-semibold text-slate-500 mr-1.5">Expected salary:</span>
                       <span className="text-[#0a2540] font-semibold">{app.expectedCtc.toLowerCase()}</span>
                     </div>
                   </div>
@@ -229,7 +229,7 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
                   {/* Skills Tags */}
                   {app.applicant?.skills && app.applicant.skills.length > 0 && (
                     <div className="space-y-1.5">
-                      <span className="text-[10px] font-bold text-slate-400 block">candidate skills</span>
+                      <span className="text-[10px] font-bold text-slate-400 block">Candidate skills</span>
                       <div className="flex flex-wrap gap-1">
                         {app.applicant.skills.map((skill, index) => {
                           const isMatch = (job.skills || []).some(
@@ -278,7 +278,7 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
                         <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
-                        <span>view resume</span>
+                        <span>View resume</span>
                       </a>
                     )}
                   </div>
@@ -290,14 +290,14 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
                       disabled={app.status === "Shortlisted"}
                       className="flex-1 sm:flex-none text-[11px] font-semibold bg-[#e8fbf6] hover:bg-[#c0f5e8] text-[#008a6b] px-3 py-1.5 rounded-lg border border-[#c0f5e8] disabled:opacity-40 transition-all text-center"
                     >
-                      shortlist
+                      Shortlist
                     </button>
                     <button
                       onClick={() => handleStatusUpdate(app._id, "Rejected", job._id)}
                       disabled={app.status === "Rejected"}
                       className="flex-1 sm:flex-none text-[11px] font-semibold bg-rose-50 hover:bg-rose-100 text-rose-700 px-3 py-1.5 rounded-lg border border-rose-200 disabled:opacity-40 transition-all text-center"
                     >
-                      reject
+                      Reject
                     </button>
                   </div>
 

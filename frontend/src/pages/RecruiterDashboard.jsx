@@ -154,17 +154,17 @@ export default function RecruiterDashboard() {
           <div>
             <h1 className="text-[18px] font-bold text-white tracking-tight">
               {activeTab === "listings"
-                ? "manage your listings"
+                ? "Manage your listings"
                 : activeTab === "post-job"
-                ? "post a new opening"
-                : "candidates ats queue"}
+                ? "Post a new opening"
+                : "Candidates ats queue"}
             </h1>
             <p className="text-[13px] text-white/50 mt-0.5 font-normal">
               {activeTab === "listings"
-                ? "monitor job post statistics, application rates, and open roles."
+                ? "Monitor job post statistics, application rates, and open roles."
                 : activeTab === "post-job"
-                ? "publish opportunities and find candidates."
-                : "review resumes, shortlists, and filter applicants."}
+                ? "Publish opportunities and find candidates."
+                : "Review resumes, shortlists, and filter applicants."}
             </p>
           </div>
 
@@ -192,20 +192,20 @@ export default function RecruiterDashboard() {
               {showNotifications && (
                 <div className="absolute right-0 mt-2 w-80 bg-white border border-[#e6ebf1] rounded-lg shadow-xl py-2 z-50 font-sans">
                   <div className="px-4 py-2 border-b border-[#e6ebf1] flex justify-between items-center">
-                    <span className="text-[13px] font-semibold text-[#0a2540]">notifications</span>
+                    <span className="text-[13px] font-semibold text-[#0a2540]">Notifications</span>
                     {notifications.length > 0 && (
                       <button
                         onClick={() => setNotifications([])}
                         className="text-[11px] text-[#635bff] hover:underline"
                       >
-                        clear all
+                        Clear all
                       </button>
                     )}
                   </div>
                   <div className="max-h-60 overflow-y-auto">
                     {notifications.length === 0 ? (
                       <div className="px-4 py-6 text-center text-slate-400 text-[12px]">
-                        no new notifications.
+                        No new notifications.
                       </div>
                     ) : (
                       notifications.map((notif, index) => (
@@ -230,7 +230,7 @@ export default function RecruiterDashboard() {
                 {user?.name?.charAt(0).toUpperCase() || "R"}
               </div>
               <span className="text-[13px] font-semibold text-white hidden md:inline">
-                {(user?.name || "recruiter").toLowerCase()}
+                {user?.name || "Recruiter"}
               </span>
             </div>
 
@@ -238,7 +238,7 @@ export default function RecruiterDashboard() {
               onClick={handleLogout}
               className="py-1.5 px-3 bg-white/10 hover:bg-white/20 text-white/80 hover:text-white border border-white/20 rounded-lg font-medium transition-all duration-200 text-xs"
             >
-              sign out
+              Sign out
             </button>
           </div>
         </header>
