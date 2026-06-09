@@ -1,22 +1,6 @@
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { logout } from "../../redux/slices/authSlice";
-import { toast } from "react-hot-toast";
-
 export default function UserSidebar({ activeTab, setActiveTab }) {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    dispatch(logout());
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    toast.success("Logged out successfully");
-    navigate("/login");
-  };
-
   return (
-    <div className="w-64 bg-white border-r border-[#e6ebf1] text-[#0a2540] p-6 flex flex-col justify-between min-h-screen flex-shrink-0 font-sans">
+    <div className="w-64 bg-white border-r border-[#e6ebf1] text-[#0a2540] p-6 flex flex-col h-screen sticky top-0 flex-shrink-0 font-sans">
       <div>
         <h2 className="text-xl font-semibold text-[#0a2540] mb-8 pb-1 tracking-tight">
           TalentFlow AI
@@ -51,16 +35,6 @@ export default function UserSidebar({ activeTab, setActiveTab }) {
           </li>
         </ul>
       </div>
-
-      <button
-        onClick={handleLogout}
-        className="w-full py-2 px-4 bg-white hover:bg-[#f6f9fc] text-[#4f5b66] hover:text-[#0a2540] border border-[#e6ebf1] rounded-lg font-medium shadow-sm transition-all duration-200 flex items-center justify-center space-x-2 text-xs"
-      >
-        <svg className="w-3.5 h-3.5 text-current" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-        </svg>
-        <span>Logout</span>
-      </button>
     </div>
   );
 }

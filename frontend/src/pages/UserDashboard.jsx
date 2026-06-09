@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import UserSidebar from "../components/user/UserSidebar";
 import JobList from "../components/user/JobList";
 import AppliedJobs from "../components/user/AppliedJobs";
@@ -7,14 +8,25 @@ import { fetchJobs } from "../redux/slices/jobSlice";
 import { fetchMyApplications, applyToJob } from "../redux/slices/applicationSlice";
 import { GoogleInput } from "../components/common/GoogleInput";
 import { validateRequired, validateUrl, validateNumber } from "../utils/validation";
+import { logout } from "../redux/slices/authSlice";
+import { toast } from "react-hot-toast";
 
 export default function UserDashboard() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Local state for tabs and filters
   const [activeTab, setActiveTab] = useState("browse");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState("All");
+
+  // Notifications State
+  const [notifications, setNotifications] = useState([]);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [knownJobIds, setKnownJobIds] = useState([]);
+  
+  const dropdownRef = useRef(null);
 
   // Local state for Application Modal
   const [showApplyModal, setShowApplyModal] = useState(false);
@@ -45,11 +57,55 @@ export default function UserDashboard() {
   const { jobs } = useSelector((state) => state.jobs);
   const { loading: submittingApp } = useSelector((state) => state.applications);
 
-  // Fetch data on mount
+  // Polling for jobs every 15 seconds
   useEffect(() => {
     dispatch(fetchJobs());
     dispatch(fetchMyApplications());
+
+    const interval = setInterval(() => {
+      dispatch(fetchJobs());
+    }, 15000);
+
+    return () => clearInterval(interval);
   }, [dispatch]);
+
+  // Click outside to close notification dropdown
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowNotifications(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Monitor jobs array changes to identify newly posted recruiter jobs
+  useEffect(() => {
+    if (jobs && jobs.length > 0) {
+      const currentIds = jobs.map((j) => j._id);
+      if (knownJobIds.length > 0) {
+        const newJobs = jobs.filter((j) => !knownJobIds.includes(j._id));
+        if (newJobs.length > 0) {
+          const newNotifs = newJobs.map((job) => ({
+            id: job._id,
+            title: `New job posted: ${job.title}`,
+            desc: `${job.company} - ${job.location}`,
+            time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+            read: false,
+          }));
+
+          setNotifications((prev) => [...newNotifs, ...prev]);
+          setUnreadCount((prev) => prev + newNotifs.length);
+
+          newJobs.forEach((job) => {
+            toast.success(`New job posted: ${job.title} at ${job.company}`);
+          });
+        }
+      }
+      setKnownJobIds(currentIds);
+    }
+  }, [jobs, knownJobIds]);
 
   // Update default name if user loaded late
   useEffect(() => {
@@ -150,6 +206,14 @@ export default function UserDashboard() {
     );
   };
 
+  const handleLogout = () => {
+    dispatch(logout());
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    toast.success("Logged out successfully");
+    navigate("/login");
+  };
+
   return (
     <div className="flex min-h-screen bg-[#f6f9fc] text-[#0a2540] font-sans">
       {/* Sidebar */}
@@ -158,16 +222,89 @@ export default function UserDashboard() {
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-h-screen overflow-hidden">
         {/* Header */}
-        <header className="border-b border-[#e6ebf1] bg-white px-8 py-5 flex-shrink-0 flex justify-between items-center">
+        <header className="border-b border-[#e6ebf1] bg-white px-8 py-4 flex-shrink-0 flex justify-between items-center relative">
           <div>
             <h1 className="text-xl font-semibold text-[#0a2540] tracking-tight">
               {activeTab === "browse" ? "Find Your Dream Job" : "Track Your Applications"}
             </h1>
-            <p className="text-[13px] text-slate-500 mt-1 font-normal">
+            <p className="text-[13px] text-slate-500 mt-0.5 font-normal">
               {activeTab === "browse"
                 ? "Search and apply for jobs suited to your skills."
                 : "Monitor the review process of your submitted applications."}
             </p>
+          </div>
+
+          <div className="flex items-center space-x-4">
+            {/* Notification Bell */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => {
+                  setShowNotifications(!showNotifications);
+                  setUnreadCount(0);
+                }}
+                className="p-1.5 rounded-lg text-slate-500 hover:text-[#0a2540] hover:bg-[#f6f9fc] transition-all relative focus:outline-none flex items-center justify-center"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+                {unreadCount > 0 && (
+                  <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-[#635bff] rounded-full border border-white"></span>
+                )}
+              </button>
+
+              {/* Notification Dropdown */}
+              {showNotifications && (
+                <div className="absolute right-0 mt-2 w-80 bg-white border border-[#e6ebf1] rounded-lg shadow-xl py-2 z-50 font-sans">
+                  <div className="px-4 py-2 border-b border-[#e6ebf1] flex justify-between items-center">
+                    <span className="text-[13px] font-semibold text-[#0a2540]">Notifications</span>
+                    {notifications.length > 0 && (
+                      <button
+                        onClick={() => setNotifications([])}
+                        className="text-[11px] text-[#635bff] hover:underline"
+                      >
+                        Clear all
+                      </button>
+                    )}
+                  </div>
+                  <div className="max-h-60 overflow-y-auto">
+                    {notifications.length === 0 ? (
+                      <div className="px-4 py-6 text-center text-slate-400 text-[12px]">
+                        No new notifications.
+                      </div>
+                    ) : (
+                      notifications.map((notif, index) => (
+                        <div
+                          key={index}
+                          className="px-4 py-3 hover:bg-[#f6f9fc] border-b border-slate-50 last:border-b-0 cursor-pointer text-left"
+                        >
+                          <div className="text-[12px] font-medium text-[#0a2540]">{notif.title}</div>
+                          <div className="text-[11px] text-slate-500 mt-0.5">{notif.desc}</div>
+                          <div className="text-[9px] text-slate-400 mt-1 text-right">{notif.time}</div>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Profile Badge */}
+            <div className="flex items-center space-x-2 border-l border-[#e6ebf1] pl-4">
+              <div className="w-8 h-8 rounded-full bg-[#635bff]/10 text-[#635bff] flex items-center justify-center font-medium text-[13px]">
+                {user?.name?.charAt(0).toUpperCase() || "U"}
+              </div>
+              <span className="text-[13px] font-medium text-[#0a2540] hidden md:inline">
+                {user?.name || "Applicant"}
+              </span>
+            </div>
+
+            {/* Logout Button */}
+            <button
+              onClick={handleLogout}
+              className="py-1.5 px-3 bg-white hover:bg-[#f6f9fc] text-[#4f5b66] hover:text-[#0a2540] border border-[#e6ebf1] rounded-lg font-medium transition-all duration-200 text-xs shadow-sm"
+            >
+              Sign Out
+            </button>
           </div>
         </header>
 
