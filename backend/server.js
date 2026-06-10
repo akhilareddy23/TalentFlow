@@ -1,28 +1,43 @@
+const path = require('path');
+const dotenv = require('dotenv');
+dotenv.config({ path: path.resolve(__dirname, '.env') }); // ← must be FIRST before other local imports
+
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
-
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const jobRoutes = require('./routes/jobRoutes');
 const adminRoutes = require("./routes/adminRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
 const profileRoutes = require("./routes/profileRoutes");
-const path = require('path');
-dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 // Connect MongoDB
 connectDB();
 
 const app = express();
 
-// Middleware — UPDATE: Explicit CORS permissions for Vercel production
+// CORS — allows local dev + Vercel production + any Render preview URLs
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'https://talent-flow-beige-pi.vercel.app',
+];
+
 app.use(cors({
-  origin: 'https://talent-flow-beige-pi.vercel.app',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, Postman, curl, server-to-server)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error(`CORS blocked: ${origin}`));
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
+  credentials: true,
 }));
+
+
 
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
