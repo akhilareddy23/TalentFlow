@@ -40,20 +40,20 @@ export default function RecruiterJobCard({ job, onViewCandidatesClick, onDeleteC
                   <svg className="w-2.5 h-2.5 mr-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
                   </svg>
-                  {job.domain.toLowerCase()}
+                  {job.domain}
                 </span>
               </div>
             )}
 
             {/* Title */}
-            <h2 className="text-[17px] font-bold text-[#0a2540] tracking-tight leading-snug">{job.title.toLowerCase()}</h2>
+            <h2 className="text-[17px] font-bold text-[#0a2540] tracking-tight leading-snug capitalize">{job.title}</h2>
 
             {/* Company */}
             <div className="flex items-center mt-1 space-x-1.5">
               <svg className="w-3.5 h-3.5 text-[#635bff] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
-              <p className="text-[#635bff] text-[13px] font-semibold">{job.company.toLowerCase()}</p>
+              <p className="text-[#635bff] text-[13px] font-semibold capitalize">{job.company}</p>
             </div>
 
             {/* Meta badges: Location, Type, Salary */}
@@ -63,18 +63,18 @@ export default function RecruiterJobCard({ job, onViewCandidatesClick, onDeleteC
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                {job.location.toLowerCase()}
+                {job.location}
               </span>
               <span className="flex items-center bg-[#f6f9fc] text-[#4f5b66] border border-[#e6ebf1] px-2.5 py-1 rounded-lg">
                 <svg className="w-3.5 h-3.5 text-slate-400 mr-1.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                {job.jobType.toLowerCase()}
+                {job.jobType}
               </span>
               {job.salary && (
                 <span className="flex items-center bg-[#e8fbf6] text-[#008a6b] border border-[#c0f5e8] px-2.5 py-1 rounded-lg font-semibold">
                   <span className="mr-1 text-[13px] font-bold">₹</span>
-                  {job.salary.toLowerCase()}
+                  {job.salary}
                 </span>
               )}
             </div>
@@ -91,7 +91,7 @@ export default function RecruiterJobCard({ job, onViewCandidatesClick, onDeleteC
                 <div className="flex flex-wrap gap-1.5">
                   {job.skills.map((skill, index) => (
                     <span key={index} className="text-[11px] bg-white text-[#635bff] border border-[#635bff]/25 px-2 py-0.5 rounded-md font-medium">
-                      {skill.toLowerCase()}
+                      {skill}
                     </span>
                   ))}
                 </div>

@@ -25,6 +25,8 @@ const adminRoutes = require("./routes/adminRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
 
 const profileRoutes = require("./routes/profileRoutes");
+
+const aiRoutes = require("./routes/aiRoutes");
  
 // Connect MongoDB
 
@@ -85,6 +87,8 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/applications", applicationRoutes);
 
 app.use("/api/profile", profileRoutes);
+
+app.use("/api/ai", aiRoutes);
 
 app.get('/', (req, res) => {
 

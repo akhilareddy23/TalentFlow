@@ -76,7 +76,7 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
               <option value="All">All job openings ({recruiterJobs.length})</option>
               {recruiterJobs.map((job) => (
                 <option key={job._id} value={job._id}>
-                  {job.title.toLowerCase()} ({job.company.toLowerCase()})
+                  {job.title} ({job.company})
                 </option>
               ))}
             </select>
@@ -153,7 +153,7 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
                   <div className="flex justify-between items-start gap-2">
                     <div>
                       <h3 className="text-[16px] font-bold text-[#0a2540] tracking-tight">
-                        {(app.applicantName || app.applicant?.name || "anonymous").toLowerCase()}
+                        {(app.applicantName || app.applicant?.name || "Anonymous")}
                       </h3>
                       <p className="text-[12px] text-slate-400">{app.applicant?.email}</p>
                     </div>
@@ -162,15 +162,15 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
                         ? "bg-purple-50 text-purple-700 border-purple-200"
                         : "bg-blue-50 text-blue-700 border-blue-200"
                     }`}>
-                      {app.applicantType.toLowerCase()}
+                      {app.applicantType}
                     </span>
                   </div>
 
                   {/* Applied Job Banner */}
                   <div className="bg-[#f6f9fc] border border-[#e6ebf1] p-2.5 rounded-xl text-[12px] text-slate-600">
                     <span className="font-semibold text-slate-400 text-[9px] block">Job applied for</span>
-                    <span className="font-bold text-[#0a2540]">{job.title.toLowerCase()}</span>
-                    <span className="text-slate-400 ml-1.5">• {job.company.toLowerCase()}</span>
+                    <span className="font-bold text-[#0a2540] capitalize">{job.title}</span>
+                    <span className="text-slate-400 ml-1.5">• {job.company}</span>
                   </div>
 
                   {/* Profile Details */}
@@ -182,14 +182,14 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                           </svg>
                           <span className="font-semibold text-slate-500 mr-1.5">College:</span>
-                          <span className="text-[#0a2540] font-medium">{app.college.toLowerCase()}</span>
+                          <span className="text-[#0a2540] font-medium capitalize">{app.college}</span>
                         </div>
                         <div className="flex items-center">
                           <svg className="w-3.5 h-3.5 text-slate-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                           </svg>
                           <span className="font-semibold text-slate-500 mr-1.5">Degree:</span>
-                          <span className="text-[#0a2540] font-medium">{app.degree.toLowerCase()}</span>
+                          <span className="text-[#0a2540] font-medium capitalize">{app.degree}</span>
                         </div>
                       </>
                     ) : (
@@ -199,7 +199,7 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                           </svg>
                           <span className="font-semibold text-slate-500 mr-1.5">Last company:</span>
-                          <span className="text-[#0a2540] font-medium">{app.currentCompany.toLowerCase()}</span>
+                          <span className="text-[#0a2540] font-medium capitalize">{app.currentCompany}</span>
                         </div>
                         <div className="flex items-center">
                           <svg className="w-3.5 h-3.5 text-slate-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -213,7 +213,7 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2" />
                           </svg>
                           <span className="font-semibold text-slate-500 mr-1.5">Current salary:</span>
-                          <span className="text-[#0a2540] font-semibold">{app.currentCtc.toLowerCase()}</span>
+                          <span className="text-[#0a2540] font-semibold">{app.currentCtc}</span>
                         </div>
                       </>
                     )}
@@ -222,7 +222,7 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1" />
                       </svg>
                       <span className="font-semibold text-slate-500 mr-1.5">Expected salary:</span>
-                      <span className="text-[#0a2540] font-semibold">{app.expectedCtc.toLowerCase()}</span>
+                      <span className="text-[#0a2540] font-semibold">{app.expectedCtc}</span>
                     </div>
                   </div>
 
@@ -244,7 +244,7 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
                                   : "bg-white text-slate-500 border-slate-200"
                               }`}
                             >
-                              {skill.toLowerCase()}
+                              {skill}
                             </span>
                           );
                         })}
@@ -265,7 +265,7 @@ export default function CandidatesManager({ recruiterJobs, selectedJobId, setSel
                         ? "bg-rose-50 text-rose-700 border-rose-200"
                         : "bg-amber-50 text-amber-700 border-amber-200"
                     }`}>
-                      {app.status.toLowerCase()}
+                      {app.status}
                     </span>
 
                     {app.resumeUrl && (
